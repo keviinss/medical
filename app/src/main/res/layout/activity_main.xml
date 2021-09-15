@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity"
+    android:background="@android:color/white"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/linier1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="Konsultasi"
+            android:textColor="@color/colornew2"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:fontFamily="sans-serif-medium"
+            android:text=""
+            android:textColor="@color/colornew2"
+            android:textSize="17sp" />
+
+
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/ic_more_vert_black_24dp"
+        />
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@id/linier1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg_search"
+        android:drawableLeft="@drawable/ic_search_filled"
+        android:drawablePadding="10dp"
+        android:elevation="5dp"
+        android:paddingLeft="10dp"
+        android:queryHint="Cari dokter disini"
+        android:backgroundTint="@color/newwhite1"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="15sp"
+        />
+
+    <ProgressBar
+        android:id="@+id/progress_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDokter"
+        android:layout_margin="20dp"
+        android:layout_below="@id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</RelativeLayout>

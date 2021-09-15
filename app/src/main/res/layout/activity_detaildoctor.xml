@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <ImageView
+        android:id="@+id/imageDoctor"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_launcher_foreground"
+        />
+    <ImageView
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@drawable/ic_left_filled"
+        />
+    <TextView
+        android:id="@+id/nameDoctor"
+        android:layout_below="@id/imageDoctor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="DR. John Doe"
+        android:textColor="@color/colornew1"
+        android:fontFamily="@font/barlow_medium"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        />
+    <TextView
+        android:id="@+id/nameSpecialis"
+        android:layout_below="@id/nameDoctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/barlow_light"
+        android:text="Penyakit Dalam"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+    <ImageView
+        android:id="@+id/logoLocal"
+        android:layout_marginTop="10dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/nameSpecialis"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/ic_map_pin"
+        />
+    <TextView
+        android:id="@+id/locationDoctor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Bandung, Indonesia"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/nameSpecialis"
+        android:layout_toRightOf="@id/logoLocal"
+        />
+
+
+</RelativeLayout>

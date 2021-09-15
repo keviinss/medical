@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Medical</string>
+
+    <string-array name="level">
+        <item>Pilih Level : </item>
+        <item>Pasien</item>
+        <item>Dokter</item>
+    </string-array>
+</resources>
