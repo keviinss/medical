@@ -12,7 +12,7 @@ public class MyPreferences {
     public static final String IS_LOGINDOKTER = "IS_LOGINDOKTER";
     public static final String IDUSER = "IDUSER";
     public static final String NAMALENGKAP = "NAMALENGKAP";
-    public static final String NAMAPENGGUNA = "NAMAPENGGUNA";
+    public static final String EMAIL = "EMAIL";
     public static final String PASSWORD = "PASSWORD";
     public static final String STATUS = "STATUS";
 

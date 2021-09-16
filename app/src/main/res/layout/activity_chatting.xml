@@ -47,7 +47,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="dr. Abdul Rahman, Sp.PD"
+                android:text="dokter"
                 android:textColor="@android:color/black"
                 android:textSize="17sp" />
         </LinearLayout>

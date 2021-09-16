@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
     private ArrayList<User> users;
     private TextView btnLogin;
     private Button btnRegister;
-    private EditText username, password, namaLengkap, imageURL, email;
+    private EditText password, namaLengkap, imageURL, email;
     private Spinner levelUser;
     ProgressBar progressBar;
     private FirebaseAuth auth;
@@ -59,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void clearEdittext() {
         namaLengkap.requestFocus();
         namaLengkap.setText("");
-        username.setText("");
+        //username.setText("");
         email.setText("");
         password.setText("");
         levelUser.setSelection(0);
@@ -93,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void register() {
-        username = findViewById(R.id.username);
+        //username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         namaLengkap = findViewById(R.id.namaLengkap);
         imageURL = findViewById(R.id.imageURL);
@@ -116,10 +116,9 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String id, xUsername, xNamaLengkap, xEmail, xImageURL, xLeveruser, xPassword;
+                String id, xNamaLengkap, xEmail, xImageURL, xLeveruser, xPassword;
 
                 id = databaseReference.push().getKey();
-                xUsername = username.getText().toString();
                 xNamaLengkap = namaLengkap.getText().toString();
                 xEmail = email.getText().toString();
                 xImageURL = imageURL.getText().toString();
@@ -128,20 +127,20 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (xNamaLengkap.isEmpty()) {
                     namaLengkap.setError("Nama tidak boleh kosong");
-                } else if (xUsername.isEmpty()) {
-                    username.setError("Username tidak boleh kosong");
+                } else if (xEmail.isEmpty()) {
+                    email.setError("Username tidak boleh kosong");
                 } else if (xPassword.isEmpty()) {
                     password.setError("Password tidak boleh kosong");
                 } else if (xLeveruser.equals("")) {
                     Toast.makeText(RegisterActivity.this, "Wajib Di Pilih !!!", Toast.LENGTH_SHORT).show();
                 } else {
-                    User users = new User(id, xUsername, xNamaLengkap, xEmail, xImageURL, xLeveruser, xPassword);
+                    User users = new User(id, xNamaLengkap, xEmail, xImageURL, xLeveruser, xPassword);
                     databaseReference.child(id).setValue(users);
                     Toast.makeText(RegisterActivity.this, "Berhasil melakukan pendaftaran", Toast.LENGTH_SHORT).show();
                     //Reset EditText
                     namaLengkap.requestFocus();
                     namaLengkap.setText("");
-                    username.setText("");
+                    //username.setText("");
                     password.setText("");
                     levelUser.setSelection(0);
                     onBackPressed();
@@ -153,7 +152,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void init() {
         auth = FirebaseAuth.getInstance();
-        username = findViewById(R.id.username);
+        //username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         namaLengkap = findViewById(R.id.namaLengkap);
         imageURL = findViewById(R.id.imageURL);
@@ -165,16 +164,16 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String txt_username = username.getText().toString();
+                //String txt_username = username.getText().toString();
                 String txt_namaLengkap = namaLengkap.getText().toString();
                 String txt_email = email.getText().toString();
                 String txt_status = levelUser.getSelectedItem().toString();
                 String txt_password = password.getText().toString();
 
-                if (TextUtils.isEmpty(txt_username) | (TextUtils.isEmpty(txt_namaLengkap)) | TextUtils.isEmpty(txt_email) | (TextUtils.isEmpty(txt_status)) |TextUtils.isEmpty(txt_password)) {
+                if  ((TextUtils.isEmpty(txt_namaLengkap)) | TextUtils.isEmpty(txt_email) | (TextUtils.isEmpty(txt_status)) |TextUtils.isEmpty(txt_password)) {
                     Toast.makeText(getApplicationContext(), "Pastikan Data Terisi Semua", Toast.LENGTH_SHORT).show();
                 } else {
-                    register(txt_username, txt_namaLengkap, txt_email, txt_status, txt_password);
+                    register(txt_namaLengkap, txt_email, txt_status, txt_password);
                 }
             }
         });
@@ -189,7 +188,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void register(final String username, String namaLengkap, String email, String status, String password) {
+    private void register(final String namaLengkap, String email, String status, String password) {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -203,7 +202,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                             HashMap<String, String> hashMap = new HashMap<>();
                             hashMap.put("id", userid);
-                            hashMap.put("username", username);
+                            //hashMap.put("username", username);
                             hashMap.put("namaLengkap", namaLengkap);
                             hashMap.put("email", email);
                             hashMap.put("status", status);
@@ -214,8 +213,9 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                        startActivity(intent);
+//                                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+//                                        startActivity(intent);
+                                        onBackPressed();
                                         Toast.makeText(RegisterActivity.this, "Berhasil melakukan pendaftaran", Toast.LENGTH_SHORT).show();
                                         clearEdittext();
                                     }

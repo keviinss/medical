@@ -37,7 +37,7 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
     private String TAG = LoginActivity.class.getSimpleName();
     private ProgressDialog progressDialog;
-    private String username;
+    private String email;
     private String password;
     private TextView btnDaftar;
     private Button btnLogin;
@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //init();
+        auth = FirebaseAuth.getInstance();
         login();
         fullscreen();
     }
@@ -89,9 +90,11 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //login to dashboard user
-                username = IDusername.getText().toString().trim();
+                email = IDusername.getText().toString().trim();
                 password = IDpassword.getText().toString().trim();
+                auth = FirebaseAuth.getInstance();
 
                 Query query = FirebaseUtils.getReference(FirebaseUtils.ACCOUNTS_PATH).orderByKey();
 
@@ -99,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         // jika Nama Pengguna kosong
-                        if (username.isEmpty()) {
+                        if (email.isEmpty()) {
                             IDusername.setError("Username wajib diisi");
                             return;
                         }
@@ -117,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (dataSnapshot.exists()) {
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                 User userData = snapshot.getValue(User.class);
-                                if (userData.getUsername().equals(username) &&
+                                if (userData.getEmail().equals(email) &&
                                         userData.getPassword().equals(password) && userData.getStatus().equals("Pasien")) {
                                     MyPreferences.getEditorPreferences()
                                             .putBoolean(MyPreferences.IS_LOGINPASIEN, true);
@@ -130,9 +133,9 @@ public class LoginActivity extends AppCompatActivity {
                                     MyPreferences.getEditorPreferences()
                                             .putString(MyPreferences.NAMALENGKAP, userData.getNamaLengkap());
 
-                                    //GET DATA USERNAME
+                                    //GET DATA EMAIL
                                     MyPreferences.getEditorPreferences()
-                                            .putString(MyPreferences.NAMAPENGGUNA, userData.getUsername());
+                                            .putString(MyPreferences.EMAIL, userData.getEmail());
 
                                     //GET DATA PASSWORD
                                     MyPreferences.getEditorPreferences()
@@ -142,6 +145,20 @@ public class LoginActivity extends AppCompatActivity {
                                     MyPreferences.getEditorPreferences()
                                             .putString(MyPreferences.STATUS, userData.getStatus());
 
+                                    auth.signInWithEmailAndPassword(email, password)
+                                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                                    if (task.isSuccessful()) {
+                                                        //Intent intent = new Intent(getApplicationContext(), DashboardPasien.class);
+                                                        //startActivity(intent);
+                                                        //finish();
+                                                    } else {
+                                                        Toast.makeText(getApplicationContext(), "Login Gagal", Toast.LENGTH_SHORT).show();
+                                                    }
+
+                                                }
+                                            });
 
                                     progressDialog.setMessage("Mohon Tunggu");
                                     progressDialog.show();
@@ -153,7 +170,7 @@ public class LoginActivity extends AppCompatActivity {
                                     finish();
                                     Toast.makeText(LoginActivity.this, "Selamat Datang " + userData.getNamaLengkap(), Toast.LENGTH_SHORT).show();
 
-                                } else if (userData.getUsername().equals(username) &&
+                                } else if (userData.getEmail().equals(email) &&
                                         userData.getPassword().equals(password) && userData.getStatus().equals("Dokter")) {
                                     MyPreferences.getEditorPreferences()
                                             .putBoolean(MyPreferences.IS_LOGINDOKTER, true);
@@ -166,9 +183,9 @@ public class LoginActivity extends AppCompatActivity {
                                     MyPreferences.getEditorPreferences()
                                             .putString(MyPreferences.NAMALENGKAP, userData.getNamaLengkap());
 
-                                    //GET DATA USERNAME
+                                    //GET DATA EMAIL
                                     MyPreferences.getEditorPreferences()
-                                            .putString(MyPreferences.NAMAPENGGUNA, userData.getUsername());
+                                            .putString(MyPreferences.EMAIL, userData.getEmail());
 
                                     //GET DATA PASSWORD
                                     MyPreferences.getEditorPreferences()
@@ -178,6 +195,20 @@ public class LoginActivity extends AppCompatActivity {
                                     MyPreferences.getEditorPreferences()
                                             .putString(MyPreferences.STATUS, userData.getStatus());
 
+                                    auth.signInWithEmailAndPassword(email, password)
+                                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                                    if (task.isSuccessful()) {
+                                                        //Intent intent = new Intent(getApplicationContext(), DashboardDokter.class);
+                                                        //startActivity(intent);
+                                                        //finish();
+                                                    } else {
+                                                        //Toast.makeText(getApplicationContext(), "Login Gagal", Toast.LENGTH_SHORT).show();
+                                                    }
+
+                                                }
+                                            });
 
                                     progressDialog.setMessage("Mohon Tunggu");
                                     progressDialog.show();
@@ -185,7 +216,6 @@ public class LoginActivity extends AppCompatActivity {
 
                                     MyPreferences.getEditorPreferences().commit();
                                     Intent intent = new Intent(LoginActivity.this, DashboardDokter.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                     finish();
                                     Toast.makeText(LoginActivity.this, "Selamat Datang " + userData.getNamaLengkap(), Toast.LENGTH_SHORT).show();
@@ -224,18 +254,17 @@ public class LoginActivity extends AppCompatActivity {
         win.setAttributes(winParams);
     }
 
-    /*
+
     private void init() {
         auth = FirebaseAuth.getInstance();
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
+        IDusername = findViewById(R.id.IDusername);
+        IDpassword = findViewById(R.id.IDpassword);
         btnDaftar = findViewById(R.id.btnDaftar);
         btnDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(i);
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -243,8 +272,8 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String txt_email = email.getText().toString();
-                String txt_password = password.getText().toString();
+                String txt_email = IDusername.getText().toString();
+                String txt_password = IDpassword.getText().toString();
 
 
                 if (TextUtils.isEmpty(txt_email) | TextUtils.isEmpty(txt_password)) {
@@ -255,10 +284,9 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        //i.putExtra("username", username);
-                                        startActivity(i);
+                                        Intent intent = new Intent(getApplicationContext(), DashboardDokter.class);
+                                        startActivity(intent);
+                                        finish();
                                     } else {
                                         Toast.makeText(getApplicationContext(), "Login Gagal", Toast.LENGTH_SHORT).show();
                                     }
@@ -282,6 +310,6 @@ public class LoginActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
     }
-    */
+
 
 }

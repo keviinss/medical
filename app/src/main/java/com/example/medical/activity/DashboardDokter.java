@@ -18,7 +18,7 @@ import com.example.medical.session.MyPreferences;
 
 public class DashboardDokter extends AppCompatActivity {
     private TextView namaPengguna;
-    LinearLayout LLKeluar;
+    LinearLayout LLKeluar, LLKonsultasi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +27,19 @@ public class DashboardDokter extends AppCompatActivity {
         fullscreen();
 
         LLKeluar = findViewById(R.id.LLKeluar);
+        LLKonsultasi = findViewById(R.id.LLKonsultasi);
         namaPengguna = findViewById(R.id.namaPengguna);
 
         namaPengguna.setText(MyPreferences.getSharedPreferences()
                 .getString(MyPreferences.NAMALENGKAP, "namaPengguna"));
+
+        LLKonsultasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RetrievePasien.class);
+                startActivity(intent);
+            }
+        });
 
         LLKeluar.setOnClickListener(new View.OnClickListener() {
             @Override

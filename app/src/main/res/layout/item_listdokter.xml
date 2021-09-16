@@ -4,22 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:background="@android:color/white"
-    >
+    android:background="@android:color/white">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
         android:layout_centerHorizontal="true"
-        >
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/txtPasien"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible" />
 
         <RelativeLayout
             android:id="@+id/canvas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            >
+            android:clickable="true">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView1"
@@ -28,9 +31,9 @@
                 app:cardElevation="0dp">
 
                 <RelativeLayout
-                    android:layout_marginTop="1dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
                     android:background="@drawable/grad_bordercanvas"
                     android:padding="9dp">
 
@@ -38,22 +41,20 @@
                         android:id="@+id/imageDoctor"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/ic_launcher_background"
                         android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
-                        app:civ_border_color="@android:color/black"
+                        android:layout_centerVertical="true"
                         android:scaleType="centerCrop"
-                        />
+                        android:src="@drawable/ic_launcher_background"
+                        app:civ_border_color="@android:color/black" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_toRightOf="@id/imageDoctor"
                         android:layout_centerVertical="true"
-                        >
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/imageDoctor">
 
                         <TextView
                             android:id="@+id/nameDoctor"
@@ -66,15 +67,16 @@
                             android:textColor="@android:color/black"
                             android:textSize="14sp"
                             android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/nameSpecialis"
-                            android:layout_below="@id/nameDoctor"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_below="@id/nameDoctor"
                             android:layout_marginRight="50dp"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/barlow_light"
-                            android:text="Penyakit Dalam"
+                            android:text="Dokter"
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
@@ -82,13 +84,13 @@
                     </RelativeLayout>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                app:cardElevation="0dp"
-                >
+                app:cardElevation="0dp">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -100,11 +102,11 @@
                         android:id="@+id/btnChatting"
                         android:layout_width="30dp"
                         android:layout_height="44dp"
-                        android:src="@drawable/ic_communication_filled"
-                        />
+                        android:src="@drawable/ic_communication_filled" />
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView3"
                 android:layout_width="wrap_content"
@@ -123,8 +125,7 @@
                         android:id="@+id/btnVideoCall"
                         android:layout_width="30dp"
                         android:layout_height="44dp"
-                        android:src="@drawable/ic_video_call_filled"
-                        />
+                        android:src="@drawable/ic_video_call_filled" />
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>

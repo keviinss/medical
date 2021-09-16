@@ -14,7 +14,9 @@
         android:roundIcon="@drawable/signup"
         android:supportsRtl="true"
         android:theme="@style/Theme.Medical">
-        <activity android:name=".activity.DashboardDokter"></activity>
+        <activity android:name=".activity.RetrieveDokter"></activity>
+        <activity android:name=".adapter.UserAdapterDokter" />
+        <activity android:name=".activity.DashboardDokter" />
         <activity android:name=".activity.DashboardPasien" />
         <activity
             android:name=".adapter.MessageAdapter"
@@ -30,9 +32,9 @@
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity
-            android:name=".adapter.UserAdapter"
+            android:name=".adapter.UserAdapterPasien"
             tools:ignore="Instantiatable" />
-        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.RetrievePasien" />
 
         <service
             android:name=".firebase.MessagingService"

@@ -2,16 +2,14 @@ package com.example.medical.model;
 
 public class User {
     private String id;
-    private String username;
     private String namaLengkap;
     private String email;
     private String imageURL;
     private String status;
     private String password;
 
-    public User(String id, String username, String namaLengkap, String email, String imageURL, String status, String password){
+    public User(String id, String namaLengkap, String email, String imageURL, String status, String password){
         this.id = id;
-        this.username = username;
         this.namaLengkap = namaLengkap;
         this.email = email;
         this.imageURL = imageURL;
@@ -29,14 +27,6 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getNamaLengkap() {

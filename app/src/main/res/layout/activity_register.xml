@@ -74,25 +74,25 @@
                     android:text="" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                app:hintTextColor="#FFBB86FC"
-                app:passwordToggleEnabled="false">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                app:hintTextColor="#FFBB86FC"-->
+<!--                app:passwordToggleEnabled="false">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/username"
-                    android:layout_width="320dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/sign"
-                    android:hint="Username"
-                    android:inputType="text"
-                    android:paddingLeft="20dp"
-                    android:text="" />
-            </com.google.android.material.textfield.TextInputLayout>
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/username"-->
+<!--                    android:layout_width="320dp"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:background="@drawable/sign"-->
+<!--                    android:hint="Username"-->
+<!--                    android:inputType="text"-->
+<!--                    android:paddingLeft="20dp"-->
+<!--                    android:text="" />-->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"

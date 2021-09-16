@@ -19,6 +19,7 @@ import com.example.medical.R;
 import com.example.medical.adapter.MessageAdapter;
 import com.example.medical.model.Chat;
 import com.example.medical.model.User;
+import com.example.medical.session.MyPreferences;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -52,6 +53,7 @@ public class ChattingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatting);
         init();
+
     }
 
     private void init() {
@@ -64,6 +66,7 @@ public class ChattingActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
         username = findViewById(R.id.nameDoctor);
         imgDoctor = findViewById(R.id.imageDoctor);
         btnSend = findViewById(R.id.btnSend);
@@ -86,7 +89,7 @@ public class ChattingActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                username.setText(user.getUsername());
+                username.setText(user.getNamaLengkap());
                 if (user.getImageURL().equals("default")) {
                     imgDoctor.setImageResource(R.drawable.ic_launcher_background);
                 } else {

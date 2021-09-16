@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
@@ -18,9 +16,9 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.medical.R;
-import com.example.medical.activity.LoginActivity;
-import com.example.medical.adapter.UserAdapter;
+import com.example.medical.adapter.UserAdapterPasien;
 import com.example.medical.model.User;
+import com.example.medical.session.MyPreferences;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -32,13 +30,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class RetrievePasien extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private UserAdapter userAdapter;
+    private UserAdapterPasien userAdapter;
     private List<User> userList;
-    //private ArrayList<User> userList;
-    private ImageView btnLogout;
-    private TextView userLogin;
+    private ImageView img_back, btnLogout;
+    private TextView userLogin, lvlUser;
     private User user;
     private ProgressBar mProgressCircle;
     private SearchView searchView;
@@ -46,13 +43,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_retrieve_pasien);
 
         userList = new ArrayList<User>();
         mProgressCircle = findViewById(R.id.progress_circle);
         searchView = findViewById(R.id.searchView);
-        //String username = getIntent().getStringExtra("Username");
-        //userLogin.setText(username);
+        lvlUser = findViewById(R.id.lvlUser);
+        img_back = findViewById(R.id.img_back);
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        lvlUser.setText(MyPreferences.getSharedPreferences()
+                .getString(MyPreferences.STATUS, "status"));
+
         init();
     }
 
@@ -76,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         userLogin = findViewById(R.id.username);
+        /*
         btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+        */
         recyclerView = findViewById(R.id.rvDokter);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -112,12 +122,12 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<User> myList = new ArrayList<>();
         for (User object : userList)
         {
-            if(object.getUsername().toLowerCase().contains(str.toLowerCase()))
+            if(object.getNamaLengkap().toLowerCase().contains(str.toLowerCase()))
             {
                 myList.add(object);
             }
         }
-        userAdapter = new UserAdapter(MainActivity.this, myList);
+        userAdapter = new UserAdapterPasien(RetrievePasien.this, myList);
         recyclerView.setAdapter(userAdapter);
     }
 
@@ -125,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
 
+        String level = lvlUser.getText().toString();
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -134,9 +145,13 @@ public class MainActivity extends AppCompatActivity {
                     if (!user.getId().equals(firebaseUser.getUid())) {
                         userList.add(user);
                     }
+
+                    else if (!user.getId().equals(level)){
+                        userList.add(user);
+                    }
                 }
 
-                userAdapter = new UserAdapter(getApplicationContext(), userList);
+                userAdapter = new UserAdapterPasien(getApplicationContext(), userList);
                 recyclerView.setAdapter(userAdapter);
                 mProgressCircle.setVisibility(View.INVISIBLE);
             }
