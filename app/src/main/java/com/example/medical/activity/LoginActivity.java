@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         // jika Nama Pengguna kosong
                         if (email.isEmpty()) {
-                            IDusername.setError("Username wajib diisi");
+                            IDusername.setError("Email wajib diisi");
                             return;
                         }
                         // jika password kosong
@@ -221,13 +221,11 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this, "Selamat Datang " + userData.getNamaLengkap(), Toast.LENGTH_SHORT).show();
 
                                 } else {
-                                    //Toast.makeText(LoginActivity.this, "NIK dan Password belum terdaftar", Toast.LENGTH_SHORT).show();
-                                    //progressDialog.dismiss();
+
                                 }
                             }
                         } else {
-                            //Toast.makeText(login.this, "Nama Pengguna dan Password belum terdaftar", Toast.LENGTH_SHORT).show();
-                            //progressDialog.dismiss();
+
                         }
                     }
 

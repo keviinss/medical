@@ -95,7 +95,7 @@
                         android:background="@drawable/general_img_background"
 
                         android:padding="25dp"
-                        android:src="@drawable/dashboard"
+                        android:src="@drawable/icons8_new_topic"
                         app:tint="#fff" />
 
                     <TextView
@@ -135,7 +135,7 @@
                         android:layout_margin="20dp"
                         android:background="@drawable/transport_ing_background"
                         android:padding="25dp"
-                        android:src="@drawable/bus"
+                        android:src="@drawable/icons8_user"
                         app:tint="#fff" />
 
                     <TextView
@@ -181,14 +181,14 @@
                         android:layout_margin="20dp"
                         android:background="@drawable/shopping_ing_background"
                         android:padding="25dp"
-                        android:src="@drawable/shopping_cart"
+                        android:src="@drawable/icons8_talk"
                         app:tint="#fff" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lato_black"
-                        android:text="Shopping"
+                        android:text="Forum"
                         android:textColor="#D84DCA"
                         android:textSize="22sp" />
                 </LinearLayout>
@@ -221,14 +221,14 @@
                         android:layout_margin="20dp"
                         android:background="@drawable/bills_img_background"
                         android:padding="25dp"
-                        android:src="@drawable/invoice"
+                        android:src="@drawable/icons8_news"
                         app:tint="#fff" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lato_black"
-                        android:text="Bills"
+                        android:text="Berita"
                         android:textColor="#C6500F"
                         android:textSize="22sp" />
                 </LinearLayout>
@@ -267,14 +267,14 @@
                         android:layout_margin="20dp"
                         android:background="@drawable/entertainment_img_background"
                         android:padding="25dp"
-                        android:src="@drawable/video_camera"
+                        android:src="@drawable/icons8_about"
                         app:tint="#fff" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lato_black"
-                        android:text="Entertainment"
+                        android:text="Tentang"
                         android:textColor="#5569BF"
                         android:textSize="22sp" />
                 </LinearLayout>
@@ -308,7 +308,7 @@
                         android:layout_margin="20dp"
                         android:background="@drawable/grocery_img_background"
                         android:padding="25dp"
-                        android:src="@drawable/groceries"
+                        android:src="@drawable/icons8_exit"
                         app:tint="#fff" />
 
                     <TextView
